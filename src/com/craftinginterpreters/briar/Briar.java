@@ -1,3 +1,4 @@
+package com.craftinginterpreters.briar;
 
 
 import java.io.BufferedReader;
@@ -9,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Briar {
+
+    static boolean hadError = false;
     public static void main(String[] args) throws IOException {
         if (args.length > 1) {
             System.out.println("Usage: briar [script]");
@@ -18,8 +21,6 @@ public class Briar {
         } else {
             runPrompt();
         }
-
-        static boolean hadError = false;
     }
 
     private static void runFile(String path) throws IOException {
