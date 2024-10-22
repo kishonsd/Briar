@@ -26,6 +26,51 @@ class Parser {
         return expr;
     }
 
+    private Expr comparison() {
+        Expr expr = term() {
+
+            while (match(GREATER. GREATER_EQUAL, LESS, LESS_EQUAL)) {
+                Token operator = previous();
+                Expr right = term();
+                expr = new Expr.Binary(expr, operator, right);
+            }
+
+            return expr;
+        }
+
+    }
+
+    private Expr term() {
+        Expr expr = factor();
+
+        while (match(MINUS, PLUS)) {
+            token operator = previous();
+            Expr right = factor();
+            expr = new Expr.Binary(expr, operator, right);
+        }
+        return expr;
+    }
+
+    private Expr factor() { 
+        Expr expr = unary();
+
+        while (match(SLASH, STAR)) {
+            Token operator = previous();
+            Expr right = unary();
+            expr = new Exp.Binary(expr, operator, right);
+        }
+        return expr;
+    }
+
+    private Expr unary() {
+        if (match(BANG, MINUS)) {
+            Token operator = previous();
+            Expr right = unary();
+            return new Expr.Unary(operator, right);
+        }
+        return primary();
+    }
+
     private boolean match(TokenType... types) {
         for (TokenType type : types) {
             if (check(type)) {
