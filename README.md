@@ -1,0 +1,1 @@
+The Briar programming language is a dynamically-typed, interpreted language that combines simplicity simplicity with expressiveness, making it suitable for learning language design and experimenting with new features. 
